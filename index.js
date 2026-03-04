@@ -343,7 +343,7 @@ async function startUltraFastBot() {
     } catch (err) {
       console.log(`❌ View refresh error: ${err.message}`);
     }
-  }, 30000);
+  }, 3000);
 
   const statsInterval = setInterval(() => {
     botStatus.rps = ((botStatus.reqs - lastReqs) / 1).toFixed(1);
