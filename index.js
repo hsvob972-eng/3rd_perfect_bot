@@ -8,11 +8,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+
 // ========== TIKTOK VIEW FETCHER (with cache bypass) ==========
 const tiktokCache = new Map();          // video_id -> { data, timestamp }
 const lastRequestTime = new Map();      // video_id -> timestamp
 const CACHE_DURATION = 100 * 1000;      // 100 seconds (in ms)
-const MIN_REQUEST_INTERVAL = 3 * 1000;  // 3 seconds between requests to same video
+const MIN_REQUEST_INTERVAL = 1 * 1000;  // 3 seconds between requests to same video
 const USER_AGENTS = [
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -343,7 +344,7 @@ async function startUltraFastBot() {
     } catch (err) {
       console.log(`❌ View refresh error: ${err.message}`);
     }
-  }, 3000);
+  }, 30000);
 
   const statsInterval = setInterval(() => {
     botStatus.rps = ((botStatus.reqs - lastReqs) / 1).toFixed(1);
